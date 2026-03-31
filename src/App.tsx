@@ -1,8 +1,8 @@
-import axios from 'axios'
+// import axios from 'axios'
 import './App.css'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import useFatch from './pages/hooks/useFatch'
+// import { useEffect } from 'react'
+// import { useState } from 'react'
+import useFatch from './hooks/useFatch'
 
 
 interface Product {
@@ -18,26 +18,9 @@ interface Cart {
 }
 
 function App() {
-  const [carts , setCarts] = useState<Cart[]>([])
 
   const [data] = useFatch('https://dummyjson.com/carts')
 
-  //  const getData = async ()=>{
-  //  try {
-  //   const res = await axios.get('https://dummyjson.com/carts')
-  //   setCarts(res.data.carts)
-  //   console.log(res)
-  //  } catch (error) {
-  //   console.log(error)
-    
-  //  }
-
-  // }
-  
-
-  // useEffect(()=>{
-  //   getData()
-  // },[])
 
 
   return (
@@ -46,13 +29,13 @@ function App() {
     
       <h2>Cart List</h2>
 
-      {carts.map((cart) => (
+      {data &&  data.map((cart: Cart) => (
         <div key={cart.id} style={{ border: '1px solid gray', margin: '10px', padding: '10px' }}>
           <h3>Cart ID: {cart.id}</h3>
           <p>Total Price: ${cart.total}</p>
 
           <h4>Products:</h4>
-          {cart.products.map((product) => (
+          {cart.products.map((product: Product) => (
             <div key={product.id} style={{ marginLeft: '15px' }}>
               <p>{product.title} - ${product.price}</p>
             </div>
